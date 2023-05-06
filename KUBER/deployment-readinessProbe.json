@@ -1,0 +1,16 @@
+{
+	"apiVersion": "v1",
+	"kind": "Deployment",
+	"spec": {
+		"containers": [{
+			"name": "container-name",
+			"image": "index.docker.io/yournamespace/repository",
+			"readinessProbe": {
+				"httpGet": {
+					"path": "/healthz",
+					"port": 8080
+				}
+			}
+		}]
+	}
+}
