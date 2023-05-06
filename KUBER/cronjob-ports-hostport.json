@@ -1,0 +1,27 @@
+{
+	"apiVersion": "apps/v1",
+	"kind": "CronJob",
+	"metadata": {
+		"name": "example",
+		"namespace": "example-namespace"
+	},
+	"spec": {
+		"template": {
+			"spec": {
+				"containers": [{
+					"ports": [{
+							"containerPort": 80,
+							"name": "http",
+							"protocol": "TCP"
+						},
+						{
+							"containerPort": 443,
+							"name": "https",
+							"protocol": "TCP"
+						}
+					]
+				}]
+			}
+		}
+	}
+}
