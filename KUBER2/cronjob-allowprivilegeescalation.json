@@ -1,0 +1,30 @@
+{
+    "apiVersion": "batch/v1beta1",
+    "kind": "CronJob",
+    "metadata": {
+      "name": "my-cronjob"
+    },
+    "spec": {
+      "schedule": "*/1 * * * *",
+      "jobTemplate": {
+        "spec": {
+          "template": {
+            "spec": {
+              "containers": [
+                {
+                  "name": "my-cronjob-container",
+                  "image": "trusted/image:latest",
+                  "imagePullPolicy": "Always",
+                  "securityContext": {
+                    "allowPrivilegeEscalation": false
+                  }
+                }
+              ],
+              "restartPolicy": "OnFailure"
+            }
+          }
+        }
+      }
+    }
+  }
+  
