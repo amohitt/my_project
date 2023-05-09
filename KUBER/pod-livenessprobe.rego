@@ -2,9 +2,13 @@ package main
 
 liveness_probe_set(container) {
   container.livenessProbe.httpGet != null
-} else {
+}
+
+liveness_probe_set(container) {
   container.livenessProbe.tcpSocket != null
-} else {
+}
+
+liveness_probe_set(container) {
   container.livenessProbe.exec != null
 }
 
