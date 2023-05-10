@@ -1,10 +1,10 @@
 package kubernetes
 
 deny[msg] {
-  input.kind == "Deployment"
+  input.kind == "Pod"
   container := input.spec.template.spec.containers[_]
   not allow_privilege_escalation_false(container.securityContext)
-  msg := "DaemonSet must have 'allowPrivilegeEscalation' set to false in the container's securityContext."
+  msg := "Pod must have 'allowPrivilegeEscalation' set to false in the container's securityContext."
 }
 
 
