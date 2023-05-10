@@ -1,0 +1,33 @@
+{
+    "apiVersion": "apps/v1",
+    "kind": "DaemonSet",
+    "metadata": {
+      "name": "example-daemonset"
+    },
+    "spec": {
+      "selector": {
+        "matchLabels": {
+          "app": "example-app"
+        }
+      },
+      "template": {
+        "metadata": {
+          "labels": {
+            "app": "example-app"
+          }
+        },
+        "spec": {
+          "containers": [
+            {
+              "name": "example-container",
+              "image": "example-image",
+              "securityContext": {
+                "allowPrivilegeEscalation": false
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+  

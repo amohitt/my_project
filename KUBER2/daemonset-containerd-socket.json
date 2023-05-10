@@ -1,0 +1,45 @@
+{
+    "apiVersion": "apps/v1",
+    "kind": "DaemonSet",
+    "metadata": {
+      "name": "example-daemonset",
+      "namespace": "example-namespace"
+    },
+    "spec": {
+      "selector": {
+        "matchLabels": {
+          "app": "example-app"
+        }
+      },
+      "template": {
+        "metadata": {
+          "labels": {
+            "app": "example-app"
+          }
+        },
+        "spec": {
+          "containers": [
+            {
+              "name": "example-container",
+              "image": "example-image:latest",
+              "volumeMounts": [
+                {
+                  "name": "containerd-socket",
+                  "mountPath": "/run/containerd/containerd.sock"
+                }
+              ]
+            }
+          ],
+          "volumes": [
+            {
+              "name": "containerd-socket",
+              "hostPath": {
+                "path": "/run/containerd/containerd.sock"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+  

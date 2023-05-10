@@ -1,0 +1,38 @@
+{
+   "apiVersion": "apps/v1",
+   "kind": "DaemonSet",
+   "metadata": {
+      "name": "example",
+      "namespace": "example-namespace"
+   },
+   "spec": {
+      "selector": {
+         "matchLabels": {
+            "app": "example"
+         }
+      },
+      "template": {
+         "metadata": {
+            "labels": {
+               "app": "example"
+            }
+         },
+         "spec": {
+            "containers": [
+               {
+                  "name": "example-container",
+                  "image": "example-image",
+                  "securityContext": {
+                     "capabilities": {
+                        "add": [],
+                        "drop": [
+                           "hello"
+                        ]
+                     }
+                  }
+               }
+            ]
+         }
+      }
+   }
+}
