@@ -2,20 +2,20 @@ package kubernetes
 
 # Check for the existence of `hostAliases` setting in `spec`:
 
-# Define a function to check if a CronJob has hostAliases defined
-has_host_aliases(CronJob) {
-  CronJob.spec.hostAliases != null
+# Define a function to check if a Pod has hostAliases defined
+has_host_aliases(Pod) {
+  Pod.spec.hostAliases != null
 }
 
-# Deny a CronJob if it defines hostAliases and return an error message
+# Deny a Pod if it defines hostAliases and return an error message
 deny[msg] {
-  input.kind == "CronJob"
+  input.kind == "Pod"
   has_host_aliases(input)
-  msg = "CronJob should not define hostAliases"
+  msg = "Pod should not define hostAliases"
 }
 
-# Allow a CronJob if it does not define hostAliases
+# Allow a Pod if it does not define hostAliases
 allow {
-  input.kind == "CronJob"
+  input.kind == "Pod"
   not has_host_aliases(input)
 }
