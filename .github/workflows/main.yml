@@ -1,26 +1,21 @@
-name: Rego Workflow
+name: Run OPA Tests
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push]
 
 jobs:
-  build:
+  Run-OPA-Tests:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
+    - name: Check out repository code
       uses: actions/checkout@v2
 
     - name: Setup OPA
-      run: |
-        curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
-        chmod 755 ./opa
+      uses: open-policy-agent/setup-opa@v1
+      with:
+        version: latest
 
-    - name: Validate Rego
-      run: ./opa check ./rego/all.rego
+    - name: Run OPA Tests
+      run: opa test ./rego/*.rego -v
 
     - name: Validate Kubernetes Manifest
-      run: ./opa eval --data ./rego/all.rego --input ./namespace.json "data.kubernetes.admission.deny"
+      run: opa eval --data ./rego/all.rego --input ./namespace.json "data.kubernetes.admission.deny"
