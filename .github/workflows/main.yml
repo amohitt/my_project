@@ -1,0 +1,19 @@
+name: OPA Validation
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  opa-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Run OPA Validate
+        uses: ghcr.io/open-policy-agent/opa/action@v1
+        with:
+          args: "eval -f pretty --data rego/all.rego --input path-to-kubernetes-manifest.json data.kubernetes.admission.deny"
