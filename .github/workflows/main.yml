@@ -16,4 +16,4 @@ jobs:
       - name: Run OPA Validate
         uses: ghcr.io/open-policy-agent/opa/action@v1
         with:
-          args: "eval -f pretty --data rego/all.rego --input path-to-kubernetes-manifest.json data.kubernetes.admission.deny"
+          args: "eval -f pretty --data rego/all.rego --input namespace.json data.kubernetes.admission.deny"
